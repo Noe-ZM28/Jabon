@@ -1,6 +1,6 @@
 <?php
     include("HTML/Includes/Headder.php");
-?>    
+?>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/popper.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -10,31 +10,45 @@
     <link rel="stylesheet" href="social.css">
 
     <title>Carrito Compras</title>
-        <center>
-            <div class="container">
-                <ul class="navbar-nav mr-auto">
-                        <img src="img/cart.jpeg" class="nav-link dropdown-toggle img-fluid" height="70px" width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
-                        <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
-                            <table id="lista-carrito" class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Imagen</th>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+</head>
 
-                            <a href="#" id="vaciar-carrito" class="btn btn-primary btn-block">Vaciar Carrito</a>
-                            <a href="#" id="procesar-pedido" class="btn btn-danger btn-block">Procesar
-                                Compra</a>
-                        </div>
-                    </li>
-                </ul>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="row align-items-stretch justify-content-between">
+                <nav>
+                    <a class="navbar-brand" href="#">Pedidos MAGELI</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <img src="img/cart.jpeg" class="nav-link dropdown-toggle img-fluid" height="70px" width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
+                                <div id="carrito" class="dropdown-menu" aria-labelledby="">
+                                    <table id="lista-carrito" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+
+                                    <a href="#" id="vaciar-carrito" class="btn btn-primary btn-block">Vaciar Carrito</a>
+                                    <a href="#" id="procesar-pedido" class="btn btn-danger btn-block">Procesar Compra</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-        </center>
+        </div>
+    </header>
 
     <main>
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 my-4 mx-auto text-center">
@@ -222,11 +236,18 @@
         </div>
     </main>
 
+    <div class="social-bar">
+        <a href="https://www.facebook.com/pages/category/Health-Beauty/Mageli-Jabones-Naturales--114634313611004/" class="icon icon-facebook2" target="-blanck">_Siguenos</a>
+        <a href="https://web.whatsapp.com/" class="icon icon-whatsapp" target="_blanck">_5571405855</a>
+    </div>
+
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.min.js"></script>
     <script src="js/carrito.js"></script>
     <script src="js/pedido.js"></script>
+
+
 
 <?php
     include("HTML/Includes/Footer.php");

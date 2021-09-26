@@ -92,4 +92,4 @@
         </div>
   </header>
 
-        <body>
+        <body style="background-color:#E8E8E8;">
