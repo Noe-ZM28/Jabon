@@ -10,7 +10,6 @@
             <div class="container">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, harum. Sequi optio possimus nihil porro delectus repudiandae rem, doloremque illo.</p>
             </div>
-            
 
 <?php
     include("HTML/Includes/Footer.php");
