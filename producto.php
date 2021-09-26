@@ -236,11 +236,6 @@
         </div>
     </main>
 
-    <div class="social-bar">
-        <a href="https://www.facebook.com/pages/category/Health-Beauty/Mageli-Jabones-Naturales--114634313611004/" class="icon icon-facebook2" target="-blanck">_Siguenos</a>
-        <a href="https://web.whatsapp.com/" class="icon icon-whatsapp" target="_blanck">_5571405855</a>
-    </div>
-
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.min.js"></script>
