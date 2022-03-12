@@ -2,8 +2,9 @@
 include_once "funciones.php";
 $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;
-?> 
-<br><br>
+?>
+<title>Agregar productos</title>
+
     <div class="columns is-centered">
         <div class="box">
             <div class="column is-one-quarterr">

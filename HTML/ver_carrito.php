@@ -4,6 +4,7 @@ $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;
 
 $productos = obtenerProductosEnCarrito();
+?> <title>Ver carrito de compras</title> <?php 
 if (count($productos) <= 0) {
 ?> 
 <style>

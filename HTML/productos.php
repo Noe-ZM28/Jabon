@@ -2,12 +2,9 @@
 include_once "funciones.php";
 $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;
-?> 
-
-<?php
-include_once "funciones.php";
 $productos = obtenerProductos();
 ?>
+<title>Ver productos existentes</title>
 <div class="columns">
     <div class="column">
         <center><h2 class="is-size-2">Productos existentes</h2></center>
