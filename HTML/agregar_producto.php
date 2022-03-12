@@ -18,7 +18,15 @@ include_once $HEADDER;
                     <div class="field">
                         <label for="imagen">Selecciona imagen</label>
                         <div class="control">
-                            <input required id="imagen" name="imagen" class="input" type="file">
+                            <input required id="imagen" name="imagen" accept="image/" class="input" type="file"  onchange="loadFile(event)">
+                            <center><img id="output" width="200" /></center>
+
+                            <script>
+                            var loadFile = function(event) {
+                                var image = document.getElementById('output');
+                                image.src = URL.createObjectURL(event.target.files[0]);
+                            };
+                            </script>
                         </div>
                     </div>
                     <div class="field">

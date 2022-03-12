@@ -118,7 +118,12 @@ session_start();
         $sentencia = $bd->prepare("INSERT INTO productos(imagen, nombre, precio, descripcion) VALUES(?, ?, ?, ?)");
         return $sentencia->execute([$url_imagen, $nombre, $precio, $descripcion]);
     }
-
+    function actualizarProducto($id, $nombre, $descripcion, $precio){
+        $bd = obtenerConexion();
+        
+        $sentencia = $bd->prepare(" UPDATE `productos` SET `nombre` = '$nombre', `descripcion` = '$descripcion', `precio` = '$precio' WHERE `productos`.`id` = ?");
+        return $sentencia->execute([$id]);
+    }
     function eliminarProducto($id){
         $bd = obtenerConexion();
 

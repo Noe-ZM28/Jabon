@@ -39,6 +39,11 @@ $productos = obtenerProductos();
                             <td>
                                 <form action="modificar_producto.php" method="post">
                                     <input type="hidden" name="id_producto" value="<?php echo $producto->id ?>">
+                                    <input type="hidden" name="imagen" value="<?php echo $producto->imagen ?>">
+                                    <input type="hidden" name="nombre" value="<?php echo $producto->nombre ?>">
+                                    <input type="hidden" name="descripcion" value="<?php echo $producto->descripcion ?>">
+                                    <input type="hidden" name="precio" value="<?php echo $producto->precio ?>">
+
                                     <button class="button is-warning">
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
