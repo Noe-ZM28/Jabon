@@ -1,5 +1,8 @@
-<?php 
+<?php
 include_once "funciones.php";
+if ($_SESSION['username'] == "") {
+    header("Location: formulario_inicio_sesion.php");
+}
 $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;
 $productos = obtenerProductos();
