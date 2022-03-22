@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-03-2022 a las 02:42:03
+-- Tiempo de generación: 22-03-2022 a las 05:34:05
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -51,11 +51,36 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `imagen`, `nombre`, `descripcion`, `precio`) VALUES
-(6, '../Multimedia/Imagenes/jablav4.jpg', 'Jabón de lavanda', 'El jabón de lavanda es un jabón muy respetuoso con la piel. La lavanda es conocida por sus extraordinarias propiedades que hacen que este jabón sea apto para todo tipo de pieles, incluidas las pieles con problemas. El aroma a lavanda de este jabón natural ayudará a relajarte mientras lo usas.', '45.00'),
-(7, '../Multimedia/Imagenes/jabaven1.jpg', 'Jabón de avena', 'Jabón en barra echo a base de ingredientes 100% naturales, el proceso de obtención de nuestro jabón es a base de una saponificación en frio por lo tanto sus propiedades nunca se pierden durante el proceso de elaboración a cambio de un proceso de saponificación en caliente.', '39.00'),
-(8, '../Multimedia/Imagenes/jabsav7.jpg', 'Jabón de Sábila', 'La sábila contiene minerales muy valiosos, entre los cuales posee calcio, hierro, magnesio y zinc, entre otros. Además, es rica en vitaminas A, C, E y también del grupo B. ', '33.00'),
-(9, '../Multimedia/Imagenes/jabros8.jpg', 'Jabón de café y miel ', 'El jabón de café y miel de abeja es un exfoliante natural intenso que ayuda a la hora de eliminar toxinas y grasas consiguiendo una piel más tersa. \r\nSu uso es recomendado generalmente por la mañana para animarnos a despertar la piel, la mente y el cuerpo con la energía necesaria para nuestro día.', '52.00'),
-(10, '../Multimedia/Imagenes/javlech10.jpg', 'Jabón de coco', 'El jabón a base de coco, tanto si lleva coco natural rallado y aceite de coco como si solo tiene uno de los dos ingredientes, está lleno de propiedades que ofrecen grandes beneficios a nuestra piel. Entre ellos, destacamos las siguientes propiedades y beneficios del jabón de coco.', '40.00');
+(18, '../Multimedia/Imagenes/jablav4.jpg', 'Jabón de lavanda', 'El jabón de lavanda es un jabón muy respetuoso con la piel. La lavanda es conocida por sus extraordinarias propiedades que hacen que este jabón sea apto para todo tipo de pieles, incluidas las pieles con problemas. El aroma a lavanda de este jabón natural ayudará a relajarte mientras lo usas.', '45.00'),
+(19, '../Multimedia/Imagenes/jabaven1.jpg', 'Jabón de avena', 'Jabón en barra echo a base de ingredientes 100% naturales, el proceso de obtención de nuestro jabón es a base de una saponificación en frio por lo tanto sus propiedades nunca se pierden durante el proceso de elaboración a cambio de un proceso de saponificación en caliente.', '39.00'),
+(20, '../Multimedia/Imagenes/jabsav7.jpg', 'Jabón de Sábila', 'La sábila contiene minerales muy valiosos, entre los cuales posee calcio, hierro, magnesio y zinc, entre otros. Además, es rica en vitaminas A, C, E y también del grupo B. ', '33.00'),
+(21, '../Multimedia/Imagenes/jabros8.jpg', 'Jabón de café y miel ', 'El jabón de café y miel de abeja es un exfoliante natural intenso que ayuda a la hora de eliminar toxinas y grasas consiguiendo una piel más tersa. \r\nSu uso es recomendado generalmente por la mañana para animarnos a despertar la piel, la mente y el cuerpo con la energía necesaria para nuestro día.', '52.00'),
+(22, '../Multimedia/Imagenes/javlech10.jpg', 'Jabón de coco', 'El jabón a base de coco, tanto si lleva coco natural rallado y aceite de coco como si solo tiene uno de los dos ingredientes, está lleno de propiedades que ofrecen grandes beneficios a nuestra piel. Entre ellos, destacamos las siguientes propiedades y beneficios del jabón de coco.', '40.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `usuario` varchar(15) NOT NULL,
+  `nombre_apellidos` varchar(50) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `numero` int(12) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `nivel` enum('admin','usuario') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `usuario`, `nombre_apellidos`, `email`, `numero`, `password`, `nivel`) VALUES
+(1, 'Administrador', 'Noe Zuñiga', 'admin@gmail.com', 1234567983, '123456789', 'admin'),
+(2, 'Usuario', 'Noe Zuñiga', 'user@gmail.com', 987654321, '123456789', 'usuario'),
+(3, 'Z', 'Noe Zuñiga Morales', 'brinknene@gmail.com', 101010101, '123456789', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -74,6 +99,12 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -81,7 +112,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas

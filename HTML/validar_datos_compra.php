@@ -1,15 +1,12 @@
 <?php
-    $email = $_POST["email"];
-    $mensaje_error ="";
-    if ($_POST["pago"] == "Seleccione forma de pago"){
-        $mensaje_error = "Seleccione una forma de pago";
-    } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+include_once "funciones.php";
+if ($_SESSION['username'] == "") {
+    header("Location: formulario_inicio_sesion.php");
+    
+}
+$HEADDER = obtenerVariableDelEntorno("HEADDER");
+include_once $HEADDER;
 
-    }else{
-        $mensaje_error = "El correo electronico ingresado no es valido";
-    }
-?>
-<?php
 include_once "funciones.php";
 $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;

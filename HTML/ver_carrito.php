@@ -109,7 +109,7 @@ if (count($productos) <= 0) {
                     </tfoot>
                 </table>
                 <center>
-                    <a href="terminar_compra.php" class="button  is-medium is-success parpadea"><i class="fa fa-check"></i>&nbsp;Terminar compra</a>
+                    <a href="generar_reporte.php" class="button  is-medium is-success parpadea"><i class="fa fa-check"></i>&nbsp;Terminar compra</a>
                     <a href="tienda.php" class="button  is-medium is-danger"><i class="fa fa-ban"></i>&nbsp;Regresar a la tienda</a>
                     <br>
                 </center>  

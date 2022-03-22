@@ -1,63 +1,39 @@
-<?php 
+<?php
 include_once "funciones.php";
-/*//header("Location: formulario_usuario.php");
-#haqcer algo con los datos de compra
-$productos = obtenerProductosEnCarrito();
+$HEADDER = obtenerVariableDelEntorno("HEADDER");
+include_once $HEADDER;
 
-# Puede que solo quieras los ids, para ello invoca a obtenerIdsDeProductosEnCarrito();
-var_dump($productos);*/
+$path_file = $_GET["varPath"];
+?> 
+<div class="container">
+    <title>Gracias por su compra</title>
+    <center><h1 class="is-size-2">Gracias por su compra</h1>
+    <br><br>
+    <div class="card">
+        <div class="card-content">
+            <p style="text-align: justify;text-left:inter-word;">
+                <font face="Cambria" SIZE=4 color = "black">
+                    <center>Se ha enviado un e-mail a la direccion proporcionada con los detalles de su compra agradecemos su preferencia
+                </font>
+            </p>       
+            <div class="content">
+                <br>
+                <center><a href="<?php echo $path_file;?>" download rel="noopener noreferrer" target="_blank" class="button is-danger parpadea">Descargar</a>
+            </div>
+        </div>
+        <object data="<?php echo $path_file;?>" type="application/pdf" width="100%" height="800px"> 
+            <p>It appears you don't have a PDF plugin for this browser.
+            No biggie... you can <a href="resume.pdf">click here to
+            download the PDF file.</a></p>  
+        </object>
+
+    <div class="content">
+        <br>
+        <?php echo $path_file;?>
+        <center><a href="tienda.php" class="button is-warning">Regresar</a>
+    </div>
+</div>
+    <br>
+<?php include_once "Includes/Footer.php" ?>
 
 
-
-
-
-// include class
-require('../Libreria/fpdf.php');
-
-// extend class
-class KodePDF extends FPDF {
-    protected $fontName = 'Arial';
-
-    function renderTitle($text) {
-        $this->SetTextColor(0, 0, 0);
-        $this->SetFont($this->fontName, 'B', 24);
-        $this->Cell(0, 10, utf8_decode($text), 0, 1);
-        $this->Ln();
-    }
-
-    function renderSubTitle($text) {
-        $this->SetTextColor(0, 0, 0);
-        $this->SetFont($this->fontName, 'B', 16);
-        $this->Cell(0, 10, utf8_decode($text), 0, 1);
-        $this->Ln();
-    }
-
-    function renderText($text) {
-        $this->SetTextColor(51, 51, 51);
-        $this->SetFont($this->fontName, '', 12);
-        $this->MultiCell(0, 7, utf8_decode($text), 0, 1);
-        $this->Ln();
-    }
-}
-
-// create document
-$pdf = new KodePDF();
-$pdf->AddPage();
-
-// config document
-$pdf->SetTitle('Generar archivos PDF con PHP');
-$pdf->SetAuthor('Kodetop');
-$pdf->SetCreator('FPDF Maker');
-
-// add content
-$pdf->renderTitle('Generar archivos PDF con PHP');
-$pdf->renderText('Los archivos PDF se utilizan ampliamente en documentos y reportes por que se mantienen el formato, fuentes e imágenes. Por ello vamos a aprender a crear archivos PDF utilizando PHP.');
-$pdf->renderSubTitle('FPDF');
-$pdf->renderText('FPDF es una clase PHP que permite la generación de archivos PDF de forma sencilla y sin necesidad de instalar librerías adicionales, cuenta con métodos bien documentados que facilitan su uso.');
-$pdf->renderText('Antes de comenzar lo primero es descargar FPDF e incluir los archivos necesarios en nuestro proyecto.');
-$pdf->renderSubTitle('Ejemplo básico');
-$pdf->renderText('Como ejemplo básico crearemos un documento PDF en donde sólo imprimiremos un texto:');
-//$pdf->Image('assets/fpdf-code.png', null, null, 180);
-
-// output file
-$pdf->Output('', 'fpdf-advanced.pdf');
