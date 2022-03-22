@@ -1,5 +1,8 @@
 <?php 
 include_once "funciones.php";
+if (isset($_SESSION['username']) and $_SESSION['username'] != "" ) {
+    header("Location: tienda.php");
+}
 $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;
 ?> <br>
