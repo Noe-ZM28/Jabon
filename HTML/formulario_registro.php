@@ -31,6 +31,12 @@ include_once $HEADDER;
                         </div>
                     </div>
                     <div class="field">
+                        <label for="nombre">Número de celular</label>
+                        <div class="control">
+                            <input required id="numero" name="numero" class="input" type="number" placeholder="Número de celular" >
+                        </div>
+                    </div>
+                    <div class="field">
                         <label for="contraseña">Contraseña</label>
                         <div class="control">
                             <input required id="contraseña" name="contraseña" class="input" type="password" placeholder="email" >
