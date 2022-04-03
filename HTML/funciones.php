@@ -216,28 +216,76 @@ session_start();
 
 # F U N C I O N E S  P A R A   A D M I N I S T R A R  C O M P R A
 #---------------------------------------------------------------------------
-    function guardarDatos_Compra($nombre, $apellidos, $email, $pago){
-        $to = $email; 
-        $from = 'Contacto@JabonesMageli.com'; 
-        $fromName = 'Jabones Magueli'; 
-        
-        $subject = "Notificación de compra en JabonesMageli"; 
-        
-        $message = file_get_contents("plantilla.php");
-        
-        // Additional headers 
-        $headers = 'From: '.$fromName.'<'.$from.'>'; 
-        $headers .= ''."\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
-        
-        // Send email 
-        mail($to, $subject, $message, $headers);
+    function EnviarDatos_Compra($path_file){
+        $datosUsuario = obtenerDatosUsuario($_SESSION['username']);
+
+        $nickUsuario = "";
+        $nombreUsuario = "";
+        $emailUsuario = "";
+        $numeroUsuario = "";
+        $direccionUsuario = "";
+
+        foreach ($datosUsuario as $dato) {
+            $nickUsuario = $dato->usuario;
+            $nombreUsuario = $dato->nombre_apellidos;
+            $emailUsuario = $dato->email;
+            $numeroUsuario = $dato->numero;
+            $direccionUsuario = $dato->direccion;
+        }
+
+        // just edit these 
+        $to          = $emailUsuario; // addresses to email pdf to
+        $from = 'Contacto@JabonesMageli.com'; // address message is sent from
+        $subject = "Notificación de compra en JabonesMageli";  // email subject
+        $body        = "<p>The PDF is attached.</p>"; // email body
+        $pdfLocation = $path_file;//"./your-pdf.pdf"; // file location
+        $pdfName     = $path_file;//"pdf-file.pdf"; // pdf file name recipient will get
+        $filetype    = "application/pdf"; // type
+
+        // creates headers and mime boundary
+        $eol = PHP_EOL;
+        $semi_rand     = md5(time());
+        $mime_boundary = "==Multipart_Boundary_$semi_rand";
+        $headers       = "From: $from$eolMIME-Version: 1.0$eol"."Content-Type: multipart/mixed;$eol boundary=\"$mime_boundary\"";
+
+        // add html message body
+        $message = "--$mime_boundary$eol" .
+            "Content-Type: text/html; charset=\"iso-8859-1\"$eol" .
+            "Content-Transfer-Encoding: 7bit$eol$eol$body$eol";
+
+        // fetches pdf
+        $file = fopen($pdfLocation, 'rb');
+        $data = fread($file, filesize($pdfLocation));
+        fclose($file);
+        $pdf = chunk_split(base64_encode($data));
+
+        // attaches pdf to email
+        $message .= "--$mime_boundary$eol" .
+            "Content-Type: $filetype;$eol name=\"$pdfName\"$eol" .
+            "Content-Disposition: attachment;$eol filename=\"$pdfName\"$eol" .
+            "Content-Transfer-Encoding: base64$eol$eol$pdf$eol--$mime_boundary--";
+
+        // Sends the email
+        if(mail($to, $subject, $message, $headers)) {
+            echo "The email was sent.";
+        }
+        else {
+            echo "There was an error sending the mail.";
+        }
     }
+    function guardarFactura($usuario, $factura){
+        $bd = obtenerConexion();
+
+        $sentencia = $bd->prepare("INSERT INTO registro_ventas(usuario, factura) VALUES(?, ?)");
+        return $sentencia->execute([$usuario, $factura]);
+    }
+    
 #---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A  M A N E J A R  A R C H I V O S  P D F
 #---------------------------------------------------------------------------
     include_once "../Librerias/FPDF/fpdf.php";
+    include_once "../Librerias/PHPQRCODE/qrlib.php";
     class responsive_TablePDF extends FPDF{
         var $widths;
         var $aligns;
@@ -325,9 +373,6 @@ session_start();
             }
             return $nl;
         }
-    } 
+    }
 #---------------------------------------------------------------------------
-
-
-$path_file = ""
 ?>
