@@ -3,7 +3,7 @@ session_start();
 
 
 # F U N C I O N E S  D E  U S O  G L O B A L
-#############################################################################################################################################
+#---------------------------------------------------------------------------
     function obtenerVariableDelEntorno($key){
         if (defined("_ENV_CACHE")) {
             $vars = _ENV_CACHE;
@@ -39,15 +39,15 @@ session_start();
         $database->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         return $database;
     }
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A   A D M I N I S T R A R  U S U A R I O S
-#############################################################################################################################################
-    function guardarUsuario($usuario, $apellidos, $email, $numero, $contraseña){
+#---------------------------------------------------------------------------
+    function guardarUsuario($usuario, $apellidos, $email, $numero, $direccion, $contraseña){
         $bd = obtenerConexion();
 
-        $sentencia = $bd->prepare("INSERT INTO usuarios(usuario, nombre_apellidos, email, numero, password, nivel) VALUES(?, ?, ?, ?, ?, ?)");
-        return $sentencia->execute([$usuario, $apellidos, $email, $numero, $contraseña, "usuario"]);
+        $sentencia = $bd->prepare("INSERT INTO usuarios(usuario, nombre_apellidos, email, numero, direccion, password, nivel) VALUES(?, ?, ?, ?, ?, ?, ?)");
+        return $sentencia->execute([$usuario, $apellidos, $email, $numero, $direccion, $contraseña, "usuario"]);
     }
     function obtenerDatosUsuario($username){
         $bd = obtenerConexion();
@@ -59,10 +59,10 @@ session_start();
         $sentencia->execute([$username]);
         return $sentencia->fetchAll();
     }
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 # F U N C I O N E S   D E  L O G I N  Y  L O G O U T
-#############################################################################################################################################
+#---------------------------------------------------------------------------
     function login(){
         $bd = obtenerConexion();
         $usuario = $_POST['usuario'];
@@ -111,10 +111,10 @@ session_start();
         $_SESSION = [];
         header("Location: formulario_inicio_sesion.php");
     }
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A   A D M I N I S T R A R  P R O D U C T O S
-#############################################################################################################################################
+#---------------------------------------------------------------------------
     function guardarProducto($imagen, $nombre, $precio, $descripcion){
         $bd = obtenerConexion();
 
@@ -155,17 +155,18 @@ session_start();
         $sentencia = $bd->query("SELECT id, imagen, nombre, descripcion, precio FROM productos");
         return $sentencia->fetchAll();
     }
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A   A D M I N I S T R A R  C A R R I T O  D E  C O M P R A
-#############################################################################################################################################
+#---------------------------------------------------------------------------
     function agregarProductoAlCarrito($idProducto){
         $idSesion = session_id();
         $bd = obtenerConexion();
+        $user = $_SESSION['username'];
 
         // Ligar el id del producto con el usuario a través de la sesión    
-        $sentencia = $bd->prepare("INSERT INTO carrito_usuarios(id_sesion, id_producto) VALUES (?, ?)");
-        return $sentencia->execute([$idSesion, $idProducto]);
+        $sentencia = $bd->prepare("INSERT INTO carrito_usuarios(id_sesion, id_producto, usuario) VALUES (?, ?, ?)");
+        return $sentencia->execute([$idSesion, $idProducto, $user]);
     }
     function quitarProductoDelCarrito($idProducto){
         $bd = obtenerConexion();
@@ -211,10 +212,10 @@ session_start();
         $sentencia->execute([$idSesion]);
         return $sentencia->fetchAll();
     }
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A   A D M I N I S T R A R  C O M P R A
-#############################################################################################################################################
+#---------------------------------------------------------------------------
     function guardarDatos_Compra($nombre, $apellidos, $email, $pago){
         $to = $email; 
         $from = 'Contacto@JabonesMageli.com'; 
@@ -232,10 +233,10 @@ session_start();
         // Send email 
         mail($to, $subject, $message, $headers);
     }
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A  M A N E J A R  A R C H I V O S  P D F
-#############################################################################################################################################
+#---------------------------------------------------------------------------
     include_once "../Librerias/FPDF/fpdf.php";
     class responsive_TablePDF extends FPDF{
         var $widths;
@@ -325,7 +326,7 @@ session_start();
             return $nl;
         }
     } 
-#############################################################################################################################################
+#---------------------------------------------------------------------------
 
 
 $path_file = ""

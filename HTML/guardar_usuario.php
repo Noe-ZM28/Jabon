@@ -20,7 +20,7 @@ if ($_POST["usuario"] == "Administrador") {
     </section><?php
     include_once "Includes/Footer.php";
 } else {
-    guardarUsuario($_POST["usuario"], $_POST["apellidos"], $_POST["email"], $_POST["numero"], $_POST["contraseña"]);
+    guardarUsuario($_POST["usuario"], $_POST["apellidos"], $_POST["email"], $_POST["numero"], $_POST["direccion"], $_POST["contraseña"]);
     header("Location: formulario_inicio_sesion.php");
 }
 
