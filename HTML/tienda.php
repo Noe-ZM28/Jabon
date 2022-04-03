@@ -154,15 +154,7 @@ $productos = obtenerProductos();
     <?php } else { ?>
         <div class="columns is-multiline is-mobile is-centered">
             <?php 
-                $productos = obtenerProductos();
-                $ids = array();
-
-                foreach ($productos as $producto) {  
-                    array_push($ids, $producto->id);
-                }
-                $r1 = $ids[array_rand($ids)];
-                $r2 = $ids[array_rand($ids)];  
-                $r3 = $ids[array_rand($ids)];   
+                $productos = obtenerProductos(); 
                 foreach ($productos as $producto) {
                 $id_producto = $producto->id;
                 $descripcion_producto = $producto->descripcion;
@@ -170,15 +162,6 @@ $productos = obtenerProductos();
             <!--<div class="column is-one-quarter">-->
             <div class="column is-4-tablet is-3-desktop"><!---->
                 <div style="position: relative;">
-                    <?php /*if ($producto->id == $r1 || $producto->id == $r2 || $producto->id == $r3) { ?>
-                        <span style="color:red;
-                            position: absolute;
-                            top: -6px;
-                            left: 80%;
-                            font-weight: bold;font-size: x-large;"
-                            class="parpadea_oferta">¡Oferta!
-                        </span>
-                    <?php } */?>
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title is-centered is-size-5">
@@ -207,7 +190,6 @@ $productos = obtenerProductos();
                             </center>
                             <center>
                                 <h1 class="is-size-3">$<?php echo number_format($producto->precio, 2) ?></h1>
-                                <br>
                                 <?php if (productoYaEstaEnCarrito($producto->id)) { ?>
                                     <form action="eliminar_del_carrito.php" method="post">
                                         <input type="hidden" name="id_producto" value="<?php echo $producto->id ?>">
@@ -224,6 +206,8 @@ $productos = obtenerProductos();
                                         <button class="button is-warning parpadea aumentar">
                                             <i class="fa fa-cart-plus"></i>&nbsp;<strong>Agregar al carrito</strong>
                                         </button>
+                                        <h1 class="is-size-4">Cantidad: </h1>
+                                        <input required id="cantidad" name="cantidad" class="input" type="number" placeholder="Cantidad" >
                                     </form>
                                 <?php } ?>
                             </center>

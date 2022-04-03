@@ -45,6 +45,10 @@
         </svg>
 
         <style>
+            .aumentar:hover {
+            -webkit-transform:scale(1.2);
+            transform:scale(1.2);
+            }
             .parpadea {
             animation-name: parpadeo;
             animation-duration: .5s;

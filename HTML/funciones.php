@@ -159,14 +159,14 @@ session_start();
 
 # F U N C I O N E S  P A R A   A D M I N I S T R A R  C A R R I T O  D E  C O M P R A
 #---------------------------------------------------------------------------
-    function agregarProductoAlCarrito($idProducto){
+    function agregarProductoAlCarrito($idProducto, $cantidad){
         $idSesion = session_id();
         $bd = obtenerConexion();
         $user = $_SESSION['username'];
 
         // Ligar el id del producto con el usuario a través de la sesión    
-        $sentencia = $bd->prepare("INSERT INTO carrito_usuarios(id_sesion, id_producto, usuario) VALUES (?, ?, ?)");
-        return $sentencia->execute([$idSesion, $idProducto, $user]);
+        $sentencia = $bd->prepare("INSERT INTO carrito_usuarios(id_sesion, id_producto, cantidad, usuario) VALUES (?, ?, ?, ?)");
+        return $sentencia->execute([$idSesion, $idProducto, $cantidad, $user]);
     }
     function quitarProductoDelCarrito($idProducto){
         $bd = obtenerConexion();

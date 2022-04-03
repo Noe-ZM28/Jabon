@@ -68,6 +68,7 @@ if (count($productos) <= 0) {
                             <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Cantidad</th>
                             <th>Precio</th>
                             <th>Quitar</th>
                         </tr>
@@ -75,8 +76,8 @@ if (count($productos) <= 0) {
                     <tbody>
                         <?php
                         $total = 0;
-                        foreach ($productos as $producto) {
-                            $total += $producto->precio;?>
+                        $costo = 0;
+                        foreach ($productos as $producto) {?>
                             <tr>
                                 <td>
                                     <figure class="image is-64x64">
@@ -85,7 +86,10 @@ if (count($productos) <= 0) {
                                 </td>
                                 <td><?php echo $producto->nombre ?></td>
                                 <td style="text-align: justify;text-left:inter-word;"><?php echo $producto->descripcion ?></td>
-                                <td>$<?php echo number_format($producto->precio, 2) ?></td>
+                                <td>$<?php echo number_format($producto->precio, 2)?> x<?php echo $producto->cantidad?></td>
+                                <td>$<?php
+                                        $costo = $producto->precio * $producto->cantidad;
+                                        echo number_format($costo, 2);?></td>
                                 <td>
                                     <form action="eliminar_del_carrito.php" method="post">
                                         <input type="hidden" name="id_producto" value="<?php echo $producto->id ?>">
@@ -96,7 +100,9 @@ if (count($productos) <= 0) {
                                     </form>
                                 </td>
                                 <br>
-                            <?php } ?>
+                            <?php
+                                 $total += $costo;
+                            } ?>
                             </tr>
                     </tbody>
                     <tfoot>
