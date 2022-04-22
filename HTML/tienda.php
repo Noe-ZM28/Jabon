@@ -1,8 +1,14 @@
 <?php
 include_once "funciones.php";
-if ($_SESSION['username'] == "") {
+
+if(isset($_SESSION['username']))
+{
+    if ($_SESSION['username'] == "")
+    {
+        header("Location: formulario_inicio_sesion.php");
+    }
+}else{
     header("Location: formulario_inicio_sesion.php");
-    
 }
 $HEADDER = obtenerVariableDelEntorno("HEADDER");
 include_once $HEADDER;
@@ -203,11 +209,11 @@ $productos = obtenerProductos();
                                 <?php } else { ?>
                                     <form action="agregar_al_carrito.php" method="post">
                                         <input type="hidden" name="id_producto" value="<?php echo $producto->id ?>">
+                                        <h1 class="is-size-4">Cantidad: </h1>
+                                        <input required id="cantidad" name="cantidad" class="input" type="number" placeholder="Cantidad" >
                                         <button class="button is-warning parpadea aumentar">
                                             <i class="fa fa-cart-plus"></i>&nbsp;<strong>Agregar al carrito</strong>
                                         </button>
-                                        <h1 class="is-size-4">Cantidad: </h1>
-                                        <input required id="cantidad" name="cantidad" class="input" type="number" placeholder="Cantidad" >
                                     </form>
                                 <?php } ?>
                             </center>

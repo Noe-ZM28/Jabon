@@ -246,7 +246,10 @@ session_start();
         $eol = PHP_EOL;
         $semi_rand     = md5(time());
         $mime_boundary = "==Multipart_Boundary_$semi_rand";
-        $headers       = "From: $from$eolMIME-Version: 1.0$eol"."Content-Type: multipart/mixed;$eol boundary=\"$mime_boundary\"";
+        $headers      .= "\nMIME-Version: 1.0\n"."Content-Type: multipart/mixed;\n"." boundary=\"{$mime_boundary}\"";
+        $message = "This is a multi-part message in MIME format.\n\n"."--{$mime_boundary}\n"."Content-Type: text/plain;charset=\"iso-8859-1\n" .
+        "Content-Transfer-Encoding: 7bit\n\n" .
+        $mainMessage  . "\n\n";
 
         // add html message body
         $message = "--$mime_boundary$eol" .
@@ -267,7 +270,7 @@ session_start();
 
         // Sends the email
         if(mail($to, $subject, $message, $headers)) {
-            echo "The email was sent.";
+            //echo "The email was sent.";
         }
         else {
             echo "There was an error sending the mail.";
@@ -275,11 +278,10 @@ session_start();
     }
     function guardarFactura($usuario, $factura){
         $bd = obtenerConexion();
-
+    
         $sentencia = $bd->prepare("INSERT INTO registro_ventas(usuario, factura) VALUES(?, ?)");
         return $sentencia->execute([$usuario, $factura]);
     }
-    
 #---------------------------------------------------------------------------
 
 # F U N C I O N E S  P A R A  M A N E J A R  A R C H I V O S  P D F

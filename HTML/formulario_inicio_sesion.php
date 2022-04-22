@@ -17,7 +17,7 @@ include_once $HEADDER;
                     <div class="field">
                         <label for="nombre">Nombre de usuario</label>
                         <div class="control">
-                        <input required id="usuario" name="usuario" class="input" type="text" placeholder="email" >
+                        <input required id="usuario" name="usuario" class="input" type="text" placeholder="Nombre de usuario" >
                         </div>
                     </div>
                     <div class="field">

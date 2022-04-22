@@ -21,8 +21,7 @@ $productos = obtenerProductos();
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,8 +47,6 @@ $productos = obtenerProductos();
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
                                 </form>
-                            </td>
-                            <td>
                                 <form action="eliminar_producto.php" method="post">
                                     <input type="hidden" name="id_producto" value="<?php echo $producto->id ?>">
                                     <button class="button is-danger">

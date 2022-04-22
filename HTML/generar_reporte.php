@@ -17,6 +17,7 @@ $nombreUsuario = "";
 $emailUsuario = "";
 $numeroUsuario = "";
 $direccionUsuario = "";
+
 foreach ($datosUsuario as $dato) {
     $nickUsuario = $dato->usuario;
     $nombreUsuario = $dato->nombre_apellidos;
@@ -25,13 +26,14 @@ foreach ($datosUsuario as $dato) {
     $direccionUsuario = $dato->direccion;
 }
 
-setlocale(LC_ALL,"es_MX");
+$facturaPath = obtenerVariableDelEntorno("URL_FACTURA");
+$url_pagina = obtenerVariableDelEntorno("URL_PAGINA");
+$url_factura = obtenerVariableDelEntorno("URL_FACTURA");
 
-$facturaPath = '../Facturas/';
-$facturaNombre ='Compra_Usuario_'.$nickUsuario.'_'.date("Y-m-d.H.i.s").'.pdf';
-$path_file = $facturaPath.$facturaNombre;
+$facturaNombre ='Compra_Usuario_'.$nickUsuario.'_'.date("m.d.y").'.pdf';
 
-$full_url = $_SERVER['HTTP_HOST'].$path_file;
+$path_file = $url_factura.$facturaNombre;
+$url_completa = $url_pagina.$facturaNombre;
 
 $temporalDir = "../Facturas/QR/resultado.png";
 /*
@@ -39,13 +41,14 @@ Recuerda habilitar extension=gd en la configuracióh en PHP.ini
 */
 
 // Ingresamos el contenido de nuestro Código QR
-$contenido = $path_file;
+$contenido = $url_completa;
+//echo $contenido;
 
 // Exportamos una imagen llamado resultado.png que contendra el valor de la avriable $contenido
 QRcode::png($contenido,$temporalDir,QR_ECLEVEL_L,10,2);
 
 // Impresión de la imagen en el navegador listo para usarla
-echo "<div><img src='resultado.png'/></div>";
+//echo "<div><img src='resultado.png'/></div>";
 
 /*
 Recuerda habilitar extension=gd en la configuracióh en PHP.ini
@@ -57,8 +60,9 @@ $pdf->AddPage();
 $pdf->Image($temporalDir, 2, 2, 50, 50, 'PNG');
 
 //Imagen derecha
-$pdf->Image('..\Multimedia\Imagenes\logo_jabon.jpeg', 155, 2, 50, 50, 'JPG');
- 
+//$pdf->Image('..\Multimedia\Imagenes\logo_jabon.jpg', 155, 2, 50, 50, 'JPG');
+//$pdf->Image('\storage\ssd3\712\18725712\public_html\Multimedia\Imagenes\logo_jabon.jpg', 155, 2, 50, 50, 'JPG');
+
 //Texto de Título
 $pdf->SetFont('Arial','B', 15);
 $pdf->SetXY(60, 25);
@@ -71,11 +75,11 @@ $pdf->MultiCell(100, 4, utf8_decode('Reporte de compra'), 0, 'J');
 
 
 //Fecha
-$today = date("Y-m-d_H:i:s"); // March 10, 2001
+$today = date("F j, Y"); // March 10, 2001
 $pdf->SetFont('Arial','', 12);
 $pdf->SetXY(140,60);
 $pdf->Cell(15, 8, 'FECHA: '.$today, 0, 'L');
-$pdf->Line(157, 65.5, 200, 65.5);
+$pdf->Line(157, 65.5, 190, 65.5);
  
 //USUARIO
 $pdf->SetXY(25, 70);
@@ -146,7 +150,8 @@ ob_end_clean();
 //$pdf->Output(); //Salida al navegador
 $pdf->Output($path_file, 'F'); //Descarga del archivo
 
-guardarFactura($nickUsuario, $path_file);
 //EnviarDatos_Compra($path_file);
+guardarFactura($nickUsuario, $url_completa);
+
 header("Location: terminar_compra.php?path_file=$path_file&temporalDir=$temporalDir");
 ?>
