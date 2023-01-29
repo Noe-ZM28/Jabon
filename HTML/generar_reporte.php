@@ -145,7 +145,7 @@ $pdf->Cell(array_sum($width_cell),10,'Total',1,0,'R',false); // Third column of 
 $pdf->Cell($width_cell[3],10,"$".number_format($total, 2),1,1,'J',false); // Third column of row 1 
 
 // Clean any content of the output buffer
-ob_end_clean();
+//ob_end_clean();
 
 //$pdf->Output(); //Salida al navegador
 $pdf->Output($path_file, 'F'); //Descarga del archivo
